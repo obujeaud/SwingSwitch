@@ -18,9 +18,19 @@ public class PersonServiceSQL implements IService {
 		pdto.setAge(p.getAge());
 		return pdto;
 	}
+	
+	public Person dtoToPersonCreate(PersonDTO pdto) {
+		Person p = new Person();
+		p.setPrenom(pdto.getFirstName());
+		p.setName(pdto.getLastName());
+		p.setAge(pdto.getAge());
+		return p;
+		
+	}
 
 	public Person dtoToPerson(PersonDTO pdto) {
 		Person p = new Person();
+		p.setId(Long.parseLong(pdto.getId()));
 		p.setPrenom(pdto.getFirstName());
 		p.setName(pdto.getLastName());
 		p.setAge(pdto.getAge());
@@ -41,7 +51,7 @@ public class PersonServiceSQL implements IService {
 	}
 
 	public void add(PersonDTO b) throws Exception {
-		bdao.create(dtoToPerson(b));
+		bdao.create(dtoToPersonCreate(b));
 	}
 
 	public void replace(PersonDTO be) throws Exception {
